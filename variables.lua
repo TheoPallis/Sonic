@@ -45,7 +45,7 @@ player.hydroPumpForce = 0
 
 player.maxHealth = 100
 player.currentHealth = 100
-
+player.hook.manualControl  = false
  function takeDamage(damageAmount)
         player.currentHealth = math.max(0, player.currentHealth - damageAmount)
     end

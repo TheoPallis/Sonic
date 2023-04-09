@@ -8,6 +8,7 @@ camera = 'static'
 zoom  = 1
 visibleworld = false
 debugger = false
+sti  = require('lib/Simple-Tiled-Implementation/sti')
 
 function love.load()
     love.physics.setMeter(64)
@@ -19,11 +20,13 @@ function love.load()
     char = require("smooth_player")
     enemy = require('enemy')
     debugging = require('config/debugging')
+    loadMap()
 end
 
 function love.update(dt)
     timer = timer + 1 * dt / 2  
     world:update(dt)
+    gamemap:update(dt)
     -- platforms.platformupdate(dt)
     char.playerUpdate(dt)
     enemy.enemyupdate(dt,player)
@@ -39,10 +42,9 @@ if camera == 'dynamic' then
     love.graphics.translate(wx / 2, wy / 2)
     love.graphics.scale(zoom)
     love.graphics.translate(-wx / 2, -wy / 2)
-
     cam:attach()
 end
---gamemap :drawLayer(gamemap.layers("Tile Layer 1"))
+gamemap :drawLayer(gamemap.layers["Tile Layer 1"])
 if visibleworld == true then
 world:draw()
 end
@@ -64,3 +66,11 @@ function love.wheelmoved(x, y)
         zoom = zoom / 1.1
     end
 end
+
+
+function loadMap()
+   gamemap = sti('sprite/tiles.lua')
+   for i,obj in pairs(gamemap.layers["Object Layer 1"].objects) do
+    platforms.spawnplatform(obj.x,obj.y,obj.width,obj.height)
+   end
+end 

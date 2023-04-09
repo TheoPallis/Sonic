@@ -31,7 +31,10 @@ function love.keypressed(key)
         debugger = true
     elseif key == '/' then
         debugger = false
-        
+    elseif key == 'u' then
+        player.hook.manualControl = false
+    elseif key == 'i' then
+        player.hook.manualControl = true
     elseif key == 'escape' then
         love.event.quit('restart')
     end

@@ -10,7 +10,7 @@ knife_sound = love.audio.newSource("sounds/blade.mp3", "static")
 -- running_sound = (love.audio.newSource("down.wav", "static")
 sprites = require('sprites')
 -- Player attributes 1
-player = world:newRectangleCollider(VIRTUAL_WIDTH / 2, 1350, 55, 80, {collision_class = "Player"}) --x,y,width,height, unites body,fixture,shape
+player = world:newRectangleCollider(VIRTUAL_WIDTH / 2, 800, 55, 80, {collision_class = "Player"}) --x,y,width,height, unites body,fixture,shape
 small_player = world:newRectangleCollider(VIRTUAL_WIDTH / 2, 60, 55, 80, {collision_class = "Player"})
 player:setFixedRotation(true)
 player.width = 55

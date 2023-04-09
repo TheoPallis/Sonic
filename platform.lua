@@ -22,11 +22,11 @@ world:addCollisionClass('Wall')
 cameraFile =  require ('lib/camera')
 cam = cameraFile()
 
-platform1 = world:newRectangleCollider(0,500,800,5,{collision_class = "Platform"})
-platform1:setType("static")            
+-- platform1 = world:newRectangleCollider(0,500,800,5,{collision_class = "Platform"})
+-- platform1:setType("static")            
 
-platform2 = world:newRectangleCollider(1500 ,500,800,5,{collision_class = "Platform"})
-platform2:setType("static")            
+-- platform2 = world:newRectangleCollider(1500 ,500,800,5,{collision_class = "Platform"})
+-- platform2:setType("static")            
 
 ground1 = world:newRectangleCollider(0,VIRTUAL_HEIGHT - 20,VIRTUAL_WIDTH*100,10,{collision_class = "Platform"})
 ground1:setType("static")
@@ -69,6 +69,14 @@ local playerX, playerY = player:getPosition()
 if playerX + platformBuffer > lastPlatformX then
     generatePlatform()
     end
+end
+
+function platforms.spawnplatform(x,y,w,h)
+if w>0 and h>0 then
+    myplatform = world:newRectangleCollider(x,y,w,h,{collision_class = "Platform"})
+    myplatform:setType("static")    
+    table.insert(platforms,myplatform)
+end
 end
 
 

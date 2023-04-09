@@ -139,8 +139,6 @@ function jump()
     end
 end
 
-
-
 if love.keyboard.isDown('r') and not player.hook.active then
     hook.fire(player.hook, px, py, mx, my)
     player.hook.active = true
@@ -153,19 +151,55 @@ hook.update(player.hook, dt, player)
 
 if player.hook.active and player.steelState == true then
     local hookDirection = vector(player.hook.position.x - px, player.hook.position.y - py):normalized()
-    local pullForce = 1500 -- Adjust the pulling force as needed
-    local newVelocityX = hookDirection.x * pullForce * dt
-    local newVelocityY = hookDirection.y * pullForce * dt
+    local pullForce = 30000 -- Increase the pulling force for a more snappy motion
 
-    -- Get the existing player velocity
-    local currentVelocityX, currentVelocityY = player:getLinearVelocity()
+    -- Check if the player is in manual hook state and has pressed the left mouse button
+    local manualHookPull = player.hook.manualControl and love.mouse.isDown(1)
 
-    -- Combine the new velocity with the existing player velocity
-    local combinedVelocityX = currentVelocityX + newVelocityX
-    local combinedVelocityY = currentVelocityY + newVelocityY
+    -- If the player is in auto hook state or is manually pulling the hook
+    if not player.hook.manualControl or manualHookPull then
+        -- Calculate new velocity in the direction of the hook
+        local newVelocityX = hookDirection.x * pullForce * dt
+        local newVelocityY = hookDirection.y * pullForce * dt
 
-    player:setLinearVelocity(combinedVelocityX, combinedVelocityY)
+        -- Set the player's linear velocity to the calculated velocity
+        player:setLinearVelocity(newVelocityX, newVelocityY)
+    end
+
+    -- If the player is close enough to the hook, detach the hook
+    local distanceToHook = vector(player.hook.position.x - px, player.hook.position.y - py):len()
+    if distanceToHook < 10 then
+        hook.detach(player.hook)
+        player.hook.active = false
+    end
 end
+
+
+-- if love.keyboard.isDown('r') and not player.hook.active then
+--     hook.fire(player.hook, px, py, mx, my)
+--     player.hook.active = true
+-- elseif love.keyboard.isDown('t') and player.hook.active then
+--     hook.detach(player.hook)
+--     player.hook.active = false
+-- end
+-- jump()
+-- hook.update(player.hook, dt, player)
+
+-- if player.hook.active and player.steelState == true then
+--     local hookDirection = vector(player.hook.position.x - px, player.hook.position.y - py):normalized()
+--     local pullForce = 1500 -- Adjust the pulling force as needed
+--     local newVelocityX = hookDirection.x * pullForce * dt
+--     local newVelocityY = hookDirection.y * pullForce * dt
+
+--     -- Get the existing player velocity
+--     local currentVelocityX, currentVelocityY = player:getLinearVelocity()
+
+--     -- Combine the new velocity with the existing player velocity
+--     local combinedVelocityX = currentVelocityX + newVelocityX
+--     local combinedVelocityY = currentVelocityY + newVelocityY
+
+--     player:setLinearVelocity(combinedVelocityX, combinedVelocityY)
+-- end
 
 -- Boost
 if love.keyboard.isDown('lshift') then
