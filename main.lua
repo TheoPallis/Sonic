@@ -3,6 +3,7 @@ WINDOW_WIDTH  = 2560
 WINDOW_HEIGHT = 1440
 VIRTUAL_WIDTH = WINDOW_WIDTH
 VIRTUAL_HEIGHT = WINDOW_HEIGHT
+-- push = require('lib/push')
 timer = 0
 camera = 'static'
 zoom  = 1

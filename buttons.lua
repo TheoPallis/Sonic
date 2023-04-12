@@ -1,42 +1,34 @@
-function love.keypressed(key) 
-    if key == '1' then
-        player.iceState = not player.iceState
-    elseif key =='2' then
-        player.windState = not player.windState
-     elseif key == '3' then
-        player.iceState = not player.iceState
-        player.windState = not player.windState
-    elseif key == '4' then
-        player.waterState = not player.waterState
-    elseif key == '5' then
-        player.steelState = not player.steelState
-    elseif key == '6' then 
-        player.bulletstate = not player.bulletstate
+function love.keypressed(key)
+    local actions = {
+        ['1'] = function() player.iceState = not player.iceState end,
+        ['2'] = function() player.windState = not player.windState end,
+        ['3'] = function()
+            player.iceState = not player.iceState
+            player.windState = not player.windState
+        end,
+        ['4'] = function() player.waterState = not player.waterState end,
+        ['5'] = function() player.steelState = not player.steelState end,
+        ['6'] = function() player.bulletstate = not player.bulletstate end,
+        ['p'] = function() enemy.spawnenemy() end,
+        ['y'] = function() player:applyLinearImpulse(2000 * player.direction, 100) end,
+        -- ['j'] = function() player.isslashing = true end,
+        ['k'] = function() player.mattacking2 = true end,
+        ['l'] = function() player.mattacking3 = true end,
+        ['u'] = function() player.mattacking4 = true end,
+        ['i'] = function() player.mattacking5 = true end,
+        ['o'] = function() player.mattacking6 = true end,
+        ['c'] = function() camera = 'static' end,
+        ['v'] = function() camera = 'dynamic' end,
+        [']'] = function() visibleworld = true end,
+        ['['] = function() visibleworld = false end,
+        [';'] = function() debugger = true end,
+        ['/'] = function() debugger = false end,
+        ['n'] = function() player.hook.manualControl = false end,
+        ['m'] = function() player.hook.manualControl = true end,
+        ['escape'] = function() love.event.quit('restart') end,
+    }
 
-    elseif key == 'o' then
-        enemy.spawnenemy()
-    elseif key == 'i' then
-        player:applyLinearImpulse(2000 * player.direction, 100)
-    elseif key == 'j' then
-        player.isslashing = true
-    elseif key =='c' then
-        camera = 'static'
-    elseif key == 'v' then
-        camera = 'dynamic'
-    elseif key == ']' then
-        visibleworld = true
-    elseif key == '[' then
-        visibleworld = false
-    elseif key == ';' then
-        debugger = true
-    elseif key == '/' then
-        debugger = false
-    elseif key == 'u' then
-        player.hook.manualControl = false
-    elseif key == 'i' then
-        player.hook.manualControl = true
-    elseif key == 'escape' then
-        love.event.quit('restart')
+    if actions[key] then
+        actions[key]()
     end
-
-    end
+end

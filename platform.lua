@@ -10,7 +10,7 @@ local lastPlatformY = 200
 local platformBuffer = 500 -- Buffer to ensure platforms are generated off-screen
 
 wf = require 'lib/windfield/windfield'
-world = wf.newWorld(0,800,true) --gravity in both directions, always/when out of an edge apply gravity
+world = wf.newWorld(0,1100,true) --gravity in both directions, always/when out of an edge apply gravity
 world : setQueryDebugDrawing(true) --show circle that detects colliders
 world:addCollisionClass('IceDagger')
 world:addCollisionClass('Platform') 

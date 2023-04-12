@@ -26,6 +26,13 @@ player.airControlFactor = 0.5
 player.stomp  = false
 player.onenemy = false
 player.isshooting = false
+player.mattacking2 = false
+player.mattacking3 = false
+player.mattacking4 = false
+player.mattacking5 = false
+player.mattacking6 = false
+player.mattacking7 = false
+
 player.isWallRunning = false
 player.wallDirection = 0
 -- Add wind state variables

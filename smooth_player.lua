@@ -59,7 +59,7 @@ vx, vy = player:getLinearVelocity()
 mx, my = love.mouse.getPosition()
 
 if player.body then
-    char.updatePlayerDirection()
+    -- char.updatePlayerDirection()
     px, py = player:getPosition()
     wind.windupdate(dt)
     ice.iceDaggerupdate(dt)
@@ -95,14 +95,14 @@ ice.icedraw()
  end
 
 
-function char.updatePlayerDirection()
-    local mouseX, mouseY = love.mouse.getPosition()
-    local playerX, playerY = player:getPosition()
-    local angle = math.atan2(mouseY - playerY, mouseX - playerX)
-    if angle < 0 then
-        angle = angle + 2 * math.pi
-    end
-    player.angle = angle
-end
+-- function char.updatePlayerDirection()
+--     local mouseX, mouseY = love.mouse.getPosition()
+--     local playerX, playerY = player:getPosition()
+--     local angle = math.atan2(mouseY - playerY, mouseX - playerX)
+--     if angle < 0 then
+--         angle = angle + 2 * math.pi
+--     end
+--     player.angle = angle
+-- end
 
 return char
